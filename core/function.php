@@ -1,7 +1,9 @@
 <?php
 include '../core/url.php';
 include '../core/Controller.php';
+include '../core/BaseModel.php';
 $url = new Url();
+$db = new BaseModel();
 
 function getTitle()
 {
@@ -16,4 +18,24 @@ function getTitle()
     }
 
     return ucfirst($titel);
+}
+
+function urlTo($to)
+{
+    return 'http://localhost/ukk_spp'.$to;
+}
+
+function checkIsNotLogin()
+{
+    if (!isset($_SESSION['LOGIN']) || $_SESSION['LOGIN'] !== true) {
+        header("location: http://localhost/ukk_spp/login");
+        exit();
+    }
+}
+function createCookie($username, $data)
+{
+    global $db;
+    $remember = hash('sha256', $username);
+    $db->mysqli->query("UPDATE users SET remember_token = '$remember' WHERE username = '$username'");
+    setcookie('key', $remember, time() + 36000 * 24, '/');
 }

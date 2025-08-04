@@ -10,7 +10,12 @@ class Url
         $method = $this->getMethod();
         $parameter = $this->getParameter();
 
-        include '../app/controllers/' . $controller . '.php';
+        // Validate if the controller file exists
+        $controllerFile = '../app/controllers/' . $controller . '.php';
+        if (!file_exists($controllerFile)) {
+            $controller = 'HomeController';
+        }
+        include $controllerFile;
         $controller = new $controller;
 
         return call_user_func([$controller, $method], $parameter);

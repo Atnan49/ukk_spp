@@ -1,9 +1,9 @@
 <?php
+
 /**
  * 
-*/
-
-class HomeController extends Controller
+ */
+class PembayaranController extends Controller
 {
     public function __construct() 
     {
@@ -11,6 +11,6 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $this->view('home');
+        $this->view('pembayaran/home');
     }
 }
