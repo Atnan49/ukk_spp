@@ -14,7 +14,7 @@ class BaseModel
     }
     public function getByUsername($username)
     {
-        $result = $this->mysqli->query("SELECT * FROM $this->table_name WHERE username = '$username'");
+        $result = $this->mysqli->query("SELECT * FROM $this->table_name WHERE user_name = '$username'");
 
         return $result->fetch_assoc();
     }

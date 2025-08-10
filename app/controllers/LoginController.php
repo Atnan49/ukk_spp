@@ -6,6 +6,8 @@ class LoginController extends Controller
 {
     public function index()
     {
+        checkIsLogin();
+
         if (isset($_SESSION['LOGIN']) && $_SESSION['LOGIN'] === true) {
             header("location: http://localhost/ukk_spp/");
             exit();
@@ -25,7 +27,7 @@ class LoginController extends Controller
         if (!empty($data)){
             if (password_verify($password, $data['password'])) {
                 $_SESSION ['LOGIN'] = true;
-                $_SESSION ['username'] = $data['username'];
+                $_SESSION ['username'] = $data['user_name'];
                 $_SESSION ['level'] = $data['level'];
                 header("location: http://localhost/ukk_spp/");
                 

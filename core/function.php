@@ -36,6 +36,22 @@ function createCookie($username, $data)
 {
     global $db;
     $remember = hash('sha256', $username);
-    $db->mysqli->query("UPDATE users SET remember_token = '$remember' WHERE username = '$username'");
+    $db->mysqli->query("UPDATE users SET remember_token = '$remember' WHERE user_name = '$username'");
     setcookie('key', $remember, time() + 36000 * 24, '/');
+}
+
+function checkIsLogin()
+{
+    global $db;
+    if(isset($_COOKIE['key'])) {
+        $remember = $_COOKIE['key'];
+        $result = $db->mysqli->query("SELECT * FROM users WHERE remember_token = '$remember'");
+
+        if(!empty($result)) {
+            $data = $result->fetch_assoc();
+            $_SESSION['LOGIN'] = true;
+            $_SESSION['username'] = $data['user_name'];
+            $_SESSION['level'] = $data['level'];
+        }
+    }
 }
