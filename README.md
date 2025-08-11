@@ -3,11 +3,9 @@
 
 
 # cara untuk SET UP WEB
-pembayaran nama siswa nominal  {}
-# BUG SUDAH AMAN ADA MASALAH BARU 
-# FITUR untuk uang saku santri tidak bisa di buat.
 
-BUG di file fuction.php dan url.php di dalam folder core. sementara masih menggunakan sulisi sementara
+# BUG
+BUG DI UANG SAKU. belum ada koneksi uangsakucontroller ke home controler.
 
 url.php di line 13-19 menggunakan sulusi sementara
 fungtion.php di line 29-31 menggunakan sulusi sementara
