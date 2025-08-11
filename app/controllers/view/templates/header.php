@@ -11,5 +11,6 @@
         <a href="<?= urlTo('/kelas'); ?>">Kelas</a> |
         <a href="<?= urlTo('/petugas'); ?>">Petugas</a> |
         <a href="<?= urlTo('/pembayaran'); ?>">Pembayaran</a> |
+        <a href="<?= urlTo('/uang_saku'); ?>">Uang Saku</a> |
         <a href="<?= urlTo('/profil'); ?>">Profil</a> |
         <a href="<?= urlTo('/login/logout'); ?>">Logout</a>

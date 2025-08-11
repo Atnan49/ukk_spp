@@ -27,6 +27,7 @@ class LoginController extends Controller
         if (!empty($data)){
             if (password_verify($password, $data['password'])) {
                 $_SESSION ['LOGIN'] = true;
+                $_SESSION ['id_user'] = $data['id_user'];
                 $_SESSION ['username'] = $data['user_name'];
                 $_SESSION ['level'] = $data['level'];
                 header("location: http://localhost/ukk_spp/");

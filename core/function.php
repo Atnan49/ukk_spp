@@ -50,6 +50,7 @@ function checkIsLogin()
         if(!empty($result)) {
             $data = $result->fetch_assoc();
             $_SESSION['LOGIN'] = true;
+            $_SESSION['id_user'] = $data['id_user'];
             $_SESSION['username'] = $data['user_name'];
             $_SESSION['level'] = $data['level'];
         }

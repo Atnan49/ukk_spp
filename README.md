@@ -3,10 +3,7 @@
 
 
 # cara untuk SET UP WEB
-buat database di php myadmin dengan nama ukk_spp dan masukan isi dari file datbases.sql ke dalam databases ukk_spp.
-
-## Pengumuman
-
+pembayaran nama siswa nominal  {}
 # BUG SUDAH AMAN ADA MASALAH BARU 
 # FITUR untuk uang saku santri tidak bisa di buat.
 
