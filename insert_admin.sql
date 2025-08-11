@@ -1,13 +1,4 @@
--- Insert data admin default untuk login pertama kali
--- Password: admin (akan di-hash dengan PHP password_hash)
 
-INSERT INTO users (user_name, password, level) VALUES 
-('admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Admin');
-
--- Password di atas adalah hash dari 'admin'
--- Untuk membuat hash baru, gunakan: password_hash('password_anda', PASSWORD_DEFAULT) di PHP
-
--- Insert data kelas contoh
 INSERT INTO kelas (nama_kelas, kompetensi_keahlian) VALUES 
 ('XII RPL 1', 'Rekayasa Perangkat Lunak'),
 ('XII TKJ 1', 'Teknik Komputer dan Jaringan'),
