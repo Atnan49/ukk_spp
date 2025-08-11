@@ -1,4 +1,5 @@
 <?php
+mysqli_report(MYSQLI_REPORT_OFF);
 // Simple CLI/HTTP setup script to initialize the ukk_spp database.
 // - Creates database if missing
 // - Executes databases.sql (schema, triggers, views)
@@ -98,7 +99,17 @@ run_sql_file($root, __DIR__ . DIRECTORY_SEPARATOR . 'insert_admin.sql');
 
 // Ensure exactly one admin with a known password exists
 $adminUser = 'admin';
-$adminPassPlain = isset($_GET['admin_pass']) ? (string)$_GET['admin_pass'] : 'admin';
+$adminPassPlain = 'admin';
+if (php_sapi_name() === 'cli') {
+	global $argv;
+	if (isset($argv[1]) && $argv[1] !== '') {
+		$adminPassPlain = (string)$argv[1];
+	}
+} else {
+	if (isset($_GET['admin_pass']) && $_GET['admin_pass'] !== '') {
+		$adminPassPlain = (string)$_GET['admin_pass'];
+	}
+}
 $adminHash = password_hash($adminPassPlain, PASSWORD_DEFAULT);
 
 out('Ensuring single admin user ...');

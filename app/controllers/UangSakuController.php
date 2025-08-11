@@ -7,20 +7,21 @@ class UangSakuController extends Controller
     public function index()
     {
         checkIsNotLogin();
-        
         $uangSakuModel = $this->model('UangSaku');
-        
-        // Jika admin/petugas: tampilkan semua pengajuan
-        if ($_SESSION['level'] == 'Admin' || $_SESSION['level'] == 'Petugas') {
+        $data = [
+            'username' => $_SESSION['username'] ?? null,
+            'level' => $_SESSION['level'] ?? null,
+        ];
+        // Hak akses admin/petugas
+        if (!empty($_SESSION['level']) && ($_SESSION['level'] == 'Admin' || $_SESSION['level'] == 'Petugas')) {
             $data['pengajuan'] = $uangSakuModel->getAllPengajuan();
             $data['title'] = 'Kelola Uang Saku';
             $this->view('uang_saku/admin', $data);
         }
-        // Jika siswa: tampilkan saldo dan riwayat
-        else {
+        // Hak akses siswa
+        elseif (!empty($_SESSION['level']) && $_SESSION['level'] == 'Siswa') {
             $siswaModel = $this->model('Siswa');
-            $siswa = $siswaModel->getByUserId($_SESSION['id_user']);
-            
+            $siswa = $siswaModel->getByUserId($_SESSION['id_user'] ?? 0);
             if ($siswa) {
                 $data['siswa'] = $siswa;
                 $data['saldo'] = $uangSakuModel->getSaldo($siswa['id_siswa']);
@@ -28,8 +29,11 @@ class UangSakuController extends Controller
                 $data['title'] = 'Uang Saku Saya';
                 $this->view('uang_saku/siswa', $data);
             } else {
-                echo "Data siswa tidak ditemukan. Anda belum terdaftar sebagai siswa.";
+                $data['error'] = 'Data siswa tidak ditemukan. Anda belum terdaftar sebagai siswa.';
+                $this->view('uang_saku/siswa', $data);
             }
+        } else {
+            echo '<div class="alert alert-danger">Akses tidak diizinkan.</div>';
         }
     }
     

@@ -11,6 +11,10 @@ class HomeController extends Controller
     }
     public function index()
     {
-        $this->view('home');
+        $data = [
+            'username' => $_SESSION['username'] ?? null,
+            'level' => $_SESSION['level'] ?? null,
+        ];
+        $this->view('home', $data);
     }
 }

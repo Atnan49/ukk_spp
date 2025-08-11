@@ -10,7 +10,12 @@ class SiswaController extends Controller
     }
     public function index()
     {
-        $this->view('siswa/home', ['data' => 'ini data data']);
+        // Validasi session dan kirim data user ke view
+        $data = [
+            'username' => $_SESSION['username'] ?? null,
+            'level' => $_SESSION['level'] ?? null,
+        ];
+        $this->view('siswa/home', $data);
     }
     public function edit($id)
     {
